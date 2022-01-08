@@ -1,0 +1,4 @@
+.histogramContainer {
+    flex-grow: 3;
+    background-color: rgba(122,245,233, 0.4);
+}

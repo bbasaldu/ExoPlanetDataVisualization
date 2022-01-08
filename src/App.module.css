@@ -1,0 +1,20 @@
+.appWrapper {
+  
+}
+.mainTitle{
+    height: 10vh;
+    width: 100vw;
+    background-color:   rgba(255,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mainTitle h1{
+    margin: 0;
+    
+}
+.selectorWrapper{
+    width: 100vw;
+    display: flex;
+    
+}

@@ -6,7 +6,7 @@ import { getLongestTick, getTextBBox } from "../../utility";
   Uses ref of parent container for responsive sizing
 */
 export const renderChart = (vars) => {
-  const { field, data, containerRef, fill } = vars;
+  const { field, data, containerRef, fill, animate } = vars;
   const container = d3.select(containerRef);
   const width = parseFloat(container.style("width"));
   const height = parseFloat(container.style("height"));
@@ -72,8 +72,9 @@ export const renderChart = (vars) => {
         .tickFormat((d) =>
           +d >= 10000 || +d <= -10000 ? d3.format(".2s")(d) : d
         )
-        .ticks(width>400?10:5)
-    )
+        .ticks(width > 400 ? 10 : 5)
+    );
+
   //y-Axis
   svg
     .append("g")
@@ -81,15 +82,33 @@ export const renderChart = (vars) => {
     .call(d3.axisLeft(yScale).ticks(4));
 
   //group for bars in histogram
-  svg
-    .append("g")
-    .selectAll("rect")
-    .data(binData)
-    .enter()
-    .append("rect")
-    .attr("x", (d) => xScale(d.x0) + 1)
-    .attr("width", (d) => Math.max(0, xScale(d.x1) - xScale(d.x0) - 1))
-    .attr("y", (d) => yScale(d.length))
-    .attr("height", (d) => yScale(0) - yScale(d.length))
-    .attr("fill", fill);
+  if (animate) {
+    svg
+      .append("g")
+      .selectAll("rect")
+      .data(binData)
+      .enter()
+      .append("rect")
+        .attr("x", (d) => xScale(d.x0) + 1)
+        .attr("width", (d) => Math.max(0, xScale(d.x1) - xScale(d.x0) - 1))
+        .attr("y", (d) => yScale(0))
+        .attr("height", (d) => 0)
+        .attr("fill", fill)
+      .transition()
+      .duration(1000)
+        .attr("y", (d) => yScale(d.length))
+        .attr("height", (d) => yScale(0) - yScale(d.length));
+  } else {
+    svg
+      .append("g")
+      .selectAll("rect")
+      .data(binData)
+      .enter()
+      .append("rect")
+        .attr("x", (d) => xScale(d.x0) + 1)
+        .attr("width", (d) => Math.max(0, xScale(d.x1) - xScale(d.x0) - 1))
+        .attr("y", (d) => yScale(d.length))
+        .attr("height", (d) => yScale(0) - yScale(d.length))
+        .attr("fill", fill);
+  }
 };

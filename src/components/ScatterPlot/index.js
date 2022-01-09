@@ -12,18 +12,20 @@ const ScatterPlot = (props) => {
       yField,
       data,
       containerRef: containerRef.current,
+      animate: true,
     });
   }, [xField, yField, data, chartFill]);
   useEffect(() => {
-    window.addEventListener("resize", () =>
+    window.addEventListener("resize", () => {
       renderChart({
         fill: chartFill,
         xField,
         yField,
         data,
         containerRef: containerRef.current,
-      })
-    );
+        animate: false,
+      });
+    });
   }, [xField, yField, data, chartFill]);
   return (
     <div className={cls.chartWrapper}>

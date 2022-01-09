@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 import { getLongestTick, getTextBBox } from "../../utility";
 export const renderChart = (vars) => {
-  const { fill,xField,yField,  data, containerRef } = vars;
+  const { fill,xField,yField,  data, containerRef, animate } = vars;
   const container = d3.select(containerRef);
   const width = parseFloat(container.style("width"));
   const height = parseFloat(container.style("height"));
@@ -72,7 +72,21 @@ export const renderChart = (vars) => {
     //radius
     const r = 2
     //group of scatter plot points
-    svg.append('g')
+    if(animate){
+      svg.append('g')
+        .selectAll('circle')
+        .data(data)
+        .enter()
+        .append('circle')
+            .attr('cx', d => xScale(+d[xField]))
+            .attr('cy', d => yScale(+d[yField]))
+            .attr('r', 0)
+            .attr('fill', fill)
+            .transition().duration(1000)
+            .attr('r', r)
+    }
+    else{
+      svg.append('g')
         .selectAll('circle')
         .data(data)
         .enter()
@@ -81,6 +95,7 @@ export const renderChart = (vars) => {
             .attr('cy', d => yScale(+d[yField]))
             .attr('r', r)
             .attr('fill', fill)
+    }
 
 
 };

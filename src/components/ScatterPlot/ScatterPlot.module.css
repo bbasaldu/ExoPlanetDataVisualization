@@ -1,5 +1,18 @@
-.scatterContainer {
+.chartWrapper {
     height: 70vh;
     width: 100vw;
-    background-color: rgba(0,0,255, 0.1);
+}
+.title {
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+.title h1{
+    margin: 0;
+}
+.scatterContainer{
+    height: 60vh;
+    width: 100%;
 }

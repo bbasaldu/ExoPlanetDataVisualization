@@ -1,10 +1,14 @@
-.appWrapper {
-  
+.loading{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 64px;
 }
 .mainTitle{
     height: 10vh;
     width: 100vw;
-    background-color:   rgba(255,0,0,0.1);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,4 +21,9 @@
     width: 100vw;
     display: flex;
     
+}
+@media (max-width: 600px){
+    .selectorWrapper{
+        flex-direction: column;
+    }  
 }

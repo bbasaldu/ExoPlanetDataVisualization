@@ -5,7 +5,7 @@ import ScatterPlot from "./components/ScatterPlot";
 import * as d3 from "d3";
 import pathToFile from "./assets/phl_hec_all_confirmed.csv";
 //hard coded constant using commented out code below
-const newHeaders = [
+const options = [
   "P. Mass (EU)",
   "P. Max Mass (EU)",
   "P. Radius (EU)",
@@ -60,15 +60,27 @@ const newHeaders = [
   "P. Hab Moon",
   "P. Confirmed",
 ];
+/*
+App component is used to keep track of and contain the 'dashboard': 
+  loading state -> used to show loading screen while csv is parsed
+  data state -> supplies data to histrograms and scatter plots
+  xField -> keeps track of selected option from dropdown for xAxis
+  yField -> keeps track of selected option from dropdown for yAxis
+
+*/
 function App() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
-  const [options, setOptions] = useState(null);
   const [xField, setXField] = useState(null);
   const [yField, setYField] = useState(null);
+
+  //parse csv and set inital values for xField, yField and data
+  //and set loading to false
   useEffect(() => {
     d3.csv(pathToFile).then((rawData) => {
+      console.log(rawData.length)
       //just looked at the csv by eye and filtered non numeric values
+      
       //console.log(rawData[0]);
       //const keys = Object.keys(rawData[0]);
       // let newKeys = keys.slice(9, keys.length - 1);
@@ -76,17 +88,25 @@ function App() {
       //   (d) =>
       //     !d.includes("Name") && !d.includes("Type") && !d.includes("Method")
       // );
-      setXField("P. Radius (EU)");
-      setYField("P. Gravity (EU)");
+
+      //interesting looking inital values
+      setXField("P. Teq Max (K)");
+      setYField("P. Mag");
       setData(rawData);
-      setOptions(newHeaders);
       setLoading(false);
     });
   }, []);
-
+  //called when the AxisSelector for the xAxis changes selected option
+  const handleXAxisChange = (newField) => {
+    setXField(newField)
+  }
+  //called when the AxisSelector for the yAxis changes selected option
+  const handleYAxisChange = (newField) => {
+    setYField(newField)
+  }
   return (
     <div className={cls.appWrapper}>
-      {loading && <p>Loading...</p>}
+      {loading && <div className={cls.loading}><p>Loading...</p></div>}
       {!loading && (
         <Fragment>
           <div className={cls.mainTitle}>
@@ -96,15 +116,21 @@ function App() {
             <AxisSelector
               title="X-Axis"
               selected={xField}
-              options={options.filter((d) => d === yField)}
+              options={options.filter(d => d !== yField)}
+              onChange={handleXAxisChange}
+              data={data}
+              chartFill="#BDD9BF"
             />
             <AxisSelector
               title="Y-Axis"
-              selected={xField}
-              options={options.filter((d) => d === yField)}
+              selected={yField}
+              options={options.filter(d => d !== xField)}
+              onChange={handleYAxisChange}
+              data={data}
+              chartFill="#A997DF"
             />
           </div>
-          <ScatterPlot />
+          <ScatterPlot chartFill="#FFC857" xField={xField} yField={yField} data={data}/>
         </Fragment>
       )}
     </div>

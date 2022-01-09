@@ -54,7 +54,14 @@ export const renderChart = (vars) => {
   svg
     .append("g")
     .attr("transform", `translate(0, ${height - margin.bottom})`)
-    .call(d3.axisBottom(xScale));
+    .call(
+      d3
+        .axisBottom(xScale)
+        .tickFormat((d) =>
+          +d >= 10000 || +d <= -10000 ? d3.format(".2s")(d) : d
+        )
+        .ticks(width>400?10:5)
+    )
 
     //y-Axis
   svg

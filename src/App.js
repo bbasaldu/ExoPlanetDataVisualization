@@ -30,7 +30,6 @@ const options = [
   "P. Mean Distance (AU)",
   "P. Inclination (deg)",
   "P. Omega (deg)",
-  "S. Constellation",
   "S. Mass (SU)",
   "S. Radius (SU)",
   "S. Teff (K)",
@@ -59,6 +58,7 @@ const options = [
   "P. Habitable",
   "P. Hab Moon",
   "P. Confirmed",
+  "P. Disc. Year"
 ];
 /*
 App component is used to keep track of and contain the 'dashboard': 
@@ -79,15 +79,12 @@ function App() {
   useEffect(() => {
     d3.csv(pathToFile).then((rawData) => {
       console.log(rawData.length)
-      //just looked at the csv by eye and filtered non numeric values
+      /*
+      I just looked at the csv by eye and filtered non numeric values,
+      If I had more time I would've dealt with outliers and missing data better
+      */
       
-      //console.log(rawData[0]);
-      //const keys = Object.keys(rawData[0]);
-      // let newKeys = keys.slice(9, keys.length - 1);
-      // newKeys = newKeys.filter(
-      //   (d) =>
-      //     !d.includes("Name") && !d.includes("Type") && !d.includes("Method")
-      // );
+      
 
       //interesting looking inital values
       setXField("P. Teq Max (K)");

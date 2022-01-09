@@ -1,6 +1,7 @@
 .selectorContainer {
   width: calc(50% - 5px);
   height: 20vh;
+  min-height: 120px;
   display: flex;
   flex-direction: column;
   padding-left: 5px;

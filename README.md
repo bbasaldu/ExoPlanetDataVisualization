@@ -1,3 +1,3 @@
-Small expo-planet data visualization app.
+Small exo-planet data visualization app.
 Built with React and D3.
 Responsive.

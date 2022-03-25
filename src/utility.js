@@ -19,3 +19,11 @@ export const getLongestTick = (ticks) => {
     })
     return longestTick
 }
+export const debounce = (func) => {
+    let timerId;
+    return function(ev){
+        if(timerId) clearTimeout(timerId)
+        timerId = setTimeout(func,500, ev)
+    }
+
+}

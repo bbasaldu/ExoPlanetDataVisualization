@@ -78,7 +78,7 @@ function App() {
   //and set loading to false
   useEffect(() => {
     d3.csv(pathToFile).then((rawData) => {
-      console.log(rawData.length)
+      //console.log(rawData.length)
       /*
       I just looked at the csv by eye and filtered non numeric values,
       If I had more time I would've dealt with outliers and missing data better

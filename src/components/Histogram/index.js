@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { debounce } from "../../utility";
 import ChartContainer from "../ChartContainer";
 import { renderChart } from "./histogram";
 import cls from "./Histogram.module.css";
@@ -14,9 +15,9 @@ const Histogram = (props) => {
     renderChart({ fill, field, data, containerRef: containerRef.current, animate:true });
   }, [field, data, fill]);
   useEffect(() => {
-    window.addEventListener("resize", () =>
+    window.addEventListener("resize", debounce(function(ev){
       renderChart({ fill, field, data, containerRef: containerRef.current, animate: false })
-    );
+    }))
   }, [field, data, fill]);
   return (
     <ChartContainer ref={containerRef} className={cls.histogramContainer} />

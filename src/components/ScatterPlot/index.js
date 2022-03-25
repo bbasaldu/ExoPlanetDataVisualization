@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { debounce } from "../../utility";
 import ChartContainer from "../ChartContainer";
 import { renderChart } from "./scatterplot";
 import cls from "./ScatterPlot.module.css";
@@ -16,7 +17,7 @@ const ScatterPlot = (props) => {
     });
   }, [xField, yField, data, chartFill]);
   useEffect(() => {
-    window.addEventListener("resize", () => {
+    window.addEventListener("resize", debounce(function(ev){
       renderChart({
         fill: chartFill,
         xField,
@@ -25,7 +26,7 @@ const ScatterPlot = (props) => {
         containerRef: containerRef.current,
         animate: false,
       });
-    });
+    }));
   }, [xField, yField, data, chartFill]);
   return (
     <div className={cls.chartWrapper}>

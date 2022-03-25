@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/ExoPlanetDataVisualization/static/css/main.690ce793.css",
+    "main.js": "/ExoPlanetDataVisualization/static/js/main.f3ce011e.js",
+    "static/js/787.6db964d5.chunk.js": "/ExoPlanetDataVisualization/static/js/787.6db964d5.chunk.js",
+    "static/media/phl_hec_all_confirmed.csv": "/ExoPlanetDataVisualization/static/media/phl_hec_all_confirmed.c8f3d3f765e9d152eab6.csv",
+    "index.html": "/ExoPlanetDataVisualization/index.html",
+    "main.690ce793.css.map": "/ExoPlanetDataVisualization/static/css/main.690ce793.css.map",
+    "main.f3ce011e.js.map": "/ExoPlanetDataVisualization/static/js/main.f3ce011e.js.map",
+    "787.6db964d5.chunk.js.map": "/ExoPlanetDataVisualization/static/js/787.6db964d5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.690ce793.css",
+    "static/js/main.f3ce011e.js"
+  ]
+}
